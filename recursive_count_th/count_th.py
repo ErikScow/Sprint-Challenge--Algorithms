@@ -5,28 +5,15 @@ Your function must utilize recursion. It cannot contain any loops.
 '''
 
 def count_th(word):
-    global count 
-    count = 0
+    print('full word: ', word)
+    print('first two letters: ', word[0:2])
+    if len(word) < 2:
+        return 0 
+    if word[0:2] == 'th':
+        x = word[2:len(word)]
+        print('passed, remaining: ', x)
+        return 1 + count_th(x)
 
-    high = len(word) - 1
-    low = 0
-
-    mid = (high + low) // 2
-
-    right = word[mid:high + 1]
-    left = word[low:mid]
-
-    print(right, left)
-    
-    if len(word) == 0:
-        return 0
-    if len(word) == 2:
-        if word == 'th':
-            count = count + 1
-            return count
-    else:
-        count_th(left)
-        count_th(right)
-
-    print(count)
-    return count
+    y = word[1:len(word)]
+    print('failed, remaining: ', y)
+    return count_th(y)

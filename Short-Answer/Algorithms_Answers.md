@@ -5,7 +5,7 @@
 a) O(n)
 
 
-b) O(n)
+b) O(nlog(n))
 
 
 c) o(n)
