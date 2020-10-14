@@ -97,33 +97,47 @@ class SortingRobot:
         Sort the robot's list.
         """
         # Fill this out
+
+        #pick up first item and start loop
         self.set_light_on()
         self.swap_item()
-        print(self._item)
+        self.move_right()
+
         while self.light_is_on():
-                
-            if self.compare_item() == 1:
-                self.swap_item()
-                if self.can_move_right():
+
+            #if it get a smaller item, swaps and moves
+            #this block will retrieve the smallest item in the remaining array, always
+            if self.can_move_right():
+                if self.compare_item() == 1:
+                    self.swap_item()
                     self.move_right()
                     continue
-            elif self.compare_item() == -1:
-                if self.can_move_right():
+                else:
                     self.move_right()
                     continue
-            elif self.compare_item() == 0:
+
+            #if we are already at the end, 
+            #compare the last item in the array
+            #then move left until the None is found, 
+            # swap, move right, repeat loop
+            # if it can no longer mover right after it has moved to the None value, skip and hit the end of the loop
+            else:
+                if self.compare_item() == 1:
+                    self.swap_item()
+                while self.can_move_left():
+                    self.move_left()
+                    if self.compare_item() == None:
+                        self.swap_item()
+                        self.move_right()
+                        break
                 if self.can_move_right():
-                    self.move_right()
+                    self.swap_item()
                     continue
-            elif self.compare_item() == None:
-                if self.can_move_right():
-                    self.move_right()
-                    continue
-            
-            while self.can_move_left():
-                self.move_left()
-            self.swap_item()
+
+            #will only reach this line when every thing is sorted
             self.set_light_off()
+
+            
 
                 
 
